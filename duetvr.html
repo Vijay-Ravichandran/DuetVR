@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+    .sidebar {
+      width: 250px;
+      background-color: #1a237e;
+      height: 100vh;
+      color: white;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    .sidebar .logo {
+      padding: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      background-color: #1a237e;
+      display: flex;
+      align-items: center;
+      color: white;
+    }
+    .sidebar .logo img {
+      height: 30px;
+      margin-right: 10px;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar ul li {
+      padding: 15px 20px;
+      cursor: pointer;
+      border-bottom: 1px solid #34495e;
+    }
+    .sidebar ul li:hover {
+      background-color: #34495e;
+    }
+    .topbar {
+      margin-left: 250px;
+      height: 78px;
+      background-color: #1a237e;
+      color: white;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 20px;
+      position: fixed;
+      top: 100;
+      right: 0;
+      left: 0; /* ✅ Ensures it doesn’t overlap sidebar */
+      z-index: 1000;
+    }
+    .topbar .profile {
+      display: flex;
+      align-items: center;
+    }
+    .topbar .profile img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    .main {
+      margin-left: 250px;
+      padding: 20px;
+      padding-top: 80px;
+    }
+    .dashboard-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .dashboard-card h4 {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">
+      <img src="ar_app/markers/duet.png" alt="Logo">
+      Dashboard
+    </div>
+    <ul>
+      <li>My Orders</li>
+      <li>My Invoices</li>
+      <li>Contact Us</li>
+    </ul>
+  </div>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="profile">
+      <img src="https://via.placeholder.com/32" alt="Profile">
+      Vijayaragavan R
+      <a href="#" class="btn btn-sm btn-warning ms-3">Logout</a>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="main">
+    <h3>Dashboard Overview</h3>
+
+    <div class="dashboard-card">
+      <h4>Recent Orders</h4>
+      <p>You have 3 recent orders placed in the last 7 days.</p>
+    </div>
+
+    <div class="dashboard-card">
+      <h4>Invoice Summary</h4>
+      <p>2 pending invoices. Make sure to complete your payments on time.</p>
+    </div>
+
+    <div class="dashboard-card">
+      <h4>Support</h4>
+      <p>If you have any issues, feel free to contact our support team.</p>
+    </div>
+  </div>
+</body>
+</html>
