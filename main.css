@@ -111,8 +111,13 @@ body {
 
   .sidebar.collapsed {
     transform: translateX(0);
+    z-index: 1080;
   }
 
+  .main.sidebar-open {
+    filter: blur(2px); /* optional visual effect */
+  }
+  
   .main {
     margin-left: 0;
     padding-top: 80px;
