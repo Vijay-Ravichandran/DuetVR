@@ -1,0 +1,109 @@
+<?php
+session_start();
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
+// Include necessary files for PDO connection
+$rootList = include $_SERVER["DOCUMENT_ROOT"] . "/config/bootstrap.php"; // PDO connection
+require_once $_SERVER["DOCUMENT_ROOT"] . $rootList['generalPDO'];
+$conn = connector();
+
+require_once $_SERVER["DOCUMENT_ROOT"] . "/cryptor/class.cryptor.php";
+$crypt = new Cryptor();
+
+
+if (isset($_SESSION['auth']) && $_SESSION['auth']) 
+{
+    $adminName = $_SESSION["user_name"];
+    $adminEmail = $_SESSION["email"];
+    // Check if session has expired
+    $sessionLifetime = 24 * 60 * 60; // 24 hours in seconds
+    if (time() - $_SESSION['start'] > $sessionLifetime) 
+    {
+        session_unset();
+        session_destroy();
+        header('location: https://duetvr.com/admin/portal');
+        exit();
+    }
+    
+    $user_id = $_GET['id'];
+    
+    if ($user_id == $_SESSION['user_id'])
+    {
+        if($_SESSION['role'] != 'admin') 
+        {
+            session_unset();
+            session_destroy();
+            header('Location: https://duetvr.com/admin/portal');
+            // echo "You are not an admin. Role: " . htmlspecialchars($_SESSION['role'] ?? 'unknown');
+            exit();
+        } else {
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DuetVR Admin</title>
+  <link rel="stylesheet" href="https://duetvr.com/admin/portal/dashboard/style.css">
+</head>
+<body>
+  <div class="container d-flex justify-content-center align-items-center vh-100 content-area">
+    <aside class="sidebar">
+        <div class ="imgSrc">
+        <img src="https://duetvr.com/img/logo.png" alt="DuetVR" class="logo" />
+        </div>
+      
+      <nav>
+        <ul>
+          <li onclick="showDashboard()">Dashboard</li>
+          <li onclick="toggleOrders()">Orders â–¼</li>
+          <ul id="orders-submenu" class="hidden">
+            <li onclick="showWebInvite()">Web Invite</li>
+            <li onclick="showARPhotoframe()">AR Photoframe</li>
+          </ul>
+        </ul>
+      </nav>
+    </aside>
+    <div class="main">
+      <header>
+        <div class="profile">
+          <span onclick="toggleProfileMenu()">ðŸ‘¤ Admin â–¼</span>
+          <div id="profile-menu" class="dropdown hidden">
+            <button onclick="logout()">Logout</button>
+          </div>
+        </div>
+      </header>
+
+      <section id="content">
+        <!-- Dynamic content here -->
+        <div id="dashboard">
+          <div class="card">Total Enquiry</div>
+          <div class="card">Total Orders</div>
+          <div class="card">Analytics</div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://duetvr.com/admin/portal/dashboard/script.js"></script>
+</body>
+</html>
+
+<?php
+    }
+    }
+    else{
+        session_unset();
+        session_destroy();
+        header('location: https://duetvr.com/admin/portal');
+    }
+}else{
+    session_unset();
+    session_destroy();
+    header('location: https://duetvr.com/admin/portal');
+    exit(); 
+}
+?>
